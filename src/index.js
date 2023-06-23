@@ -10,6 +10,7 @@ import {
 import invalidInput from './utils/invalid-input.js';
 import up from './nwd/up.js';
 import cd from './nwd/cd.js';
+import ls from './nwd/ls.js';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
@@ -44,8 +45,10 @@ const startApp = async () => {
           __currentDir = up(__currentDir);
           break;
         case 'cd':
-          __currentDir =await cd(data, __currentDir);
+          __currentDir = await cd(data, __currentDir);
           break;
+        case 'ls':
+          __currentDir = await ls(__currentDir);
       }
       stdout.write(showDirectory(__currentDir));
     } else {
