@@ -1,7 +1,7 @@
 import { argv } from 'process'
 import { stdout } from 'process';
 import * as url from 'url';
-import * as path from 'path';
+import * as os from 'os';
 import * as readline from 'node:readline/promises';
 import {
   stdin as input,
@@ -12,10 +12,12 @@ import up from './nwd/up.js';
 import cd from './nwd/cd.js';
 import ls from './nwd/ls.js';
 import cat from './basic/cat.js';
+import add from './basic/add.js';
+import rn from './basic/rename.js';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-export let __currentDir = __dirname;
+export let __currentDir = os.homedir();
 
 const startApp = async () => {
   let userName;
@@ -31,7 +33,7 @@ const startApp = async () => {
   try {
     userName = argv[2].split('=')[1];
     stdout.write(showGreetings(userName));
-    stdout.write(showDirectory(__dirname));
+    stdout.write(showDirectory(__currentDir));
   } catch (error) {
     console.log('Enter valid start command: "npm run start -- --username=your_username" ');
   }
@@ -39,20 +41,26 @@ const startApp = async () => {
   const rl = readline.createInterface({ input, output });
 
   rl.on('line', async data => {
-    const command = data.split(' ')[0];
+    const [command, ...args] = data.split(' ');
     if (commands.includes(command)) {
       switch (command) {
         case 'up':
           __currentDir = up(__currentDir);
           break;
         case 'cd':
-          __currentDir = await cd(data, __currentDir);
+          __currentDir = await cd(args, __currentDir);
           break;
         case 'ls':
           __currentDir = await ls(__currentDir);
           break;
         case 'cat':
-          __currentDir = await cat(data, __currentDir);
+          __currentDir = await cat(args, __currentDir);
+          break;
+        case 'add':
+          await add(__currentDir, ...args);
+          break;
+        case 'rn':
+          await rn(__currentDir, ...args);
           break;
         case '.exit': {
           rl.close();
