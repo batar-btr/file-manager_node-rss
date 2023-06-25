@@ -14,6 +14,9 @@ import ls from './nwd/ls.js';
 import cat from './basic/cat.js';
 import add from './basic/add.js';
 import rn from './basic/rename.js';
+import cp from './basic/cp.js';
+import mv from './basic/mv.js';
+import rm from './basic/rm.js'
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
@@ -61,6 +64,16 @@ const startApp = async () => {
           break;
         case 'rn':
           await rn(__currentDir, ...args);
+          break;
+        case 'cp':
+          await cp(__currentDir, ...args);
+          break;
+        case 'mv':
+          await mv(__currentDir, ...args);
+          break;
+        case 'rm':
+          console.log('RM');
+          await rm(__currentDir, ...args);
           break;
         case '.exit': {
           rl.close();
