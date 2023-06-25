@@ -1,7 +1,7 @@
 import { argv } from 'process'
 import { stdout } from 'process';
 import * as url from 'url';
-import * as os from 'os';
+import { homedir } from 'os';
 import * as readline from 'node:readline/promises';
 import {
   stdin as input,
@@ -16,11 +16,12 @@ import add from './basic/add.js';
 import rn from './basic/rename.js';
 import cp from './basic/cp.js';
 import mv from './basic/mv.js';
-import rm from './basic/rm.js'
+import rm from './basic/rm.js';
+import os from './os/os.js';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-export let __currentDir = os.homedir();
+export let __currentDir = homedir();
 
 const startApp = async () => {
   let userName;
@@ -72,8 +73,10 @@ const startApp = async () => {
           await mv(__currentDir, ...args);
           break;
         case 'rm':
-          console.log('RM');
           await rm(__currentDir, ...args);
+          break;
+        case 'os':
+          await os(__currentDir, ...args);
           break;
         case '.exit': {
           rl.close();
