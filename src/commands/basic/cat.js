@@ -1,6 +1,6 @@
 import { createReadStream } from 'fs';
 import path from 'path';
-import operationFailed from '../utils/operation-failed.js';
+import operationFailed from '../../utils/operation-failed.js';
 
 export default async function cat(currentDir, pathToFile) {
   return new Promise((res) => {

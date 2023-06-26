@@ -1,6 +1,6 @@
 import path from 'path';
 import { createReadStream, createWriteStream, rm } from 'fs'
-import operationFailed from '../utils/operation-failed.js';
+import operationFailed from '../../utils/operation-failed.js';
 
 export default async function mv(currentDir, from, to) {
   return new Promise(res => {

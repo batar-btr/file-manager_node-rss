@@ -1,5 +1,5 @@
 import * as OS from 'os';
-import operationFailed from '../utils/operation-failed.js';
+import operationFailed from '../../utils/operation-failed.js';
 
 export default async function os(currentDir, command) {
   try {

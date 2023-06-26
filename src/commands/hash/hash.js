@@ -1,7 +1,7 @@
 import path from 'path';
 import { createHash } from 'crypto';
 import { readFile } from 'fs/promises';
-import operationFailed from '../utils/operation-failed.js';
+import operationFailed from '../../utils/operation-failed.js';
 
 export default async function hash(currentDir, pathToFile) {
   try {

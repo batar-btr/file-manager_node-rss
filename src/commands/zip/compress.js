@@ -1,7 +1,7 @@
 import { resolve, parse } from 'path'
 import { createReadStream, createWriteStream } from 'fs';
 import { createBrotliCompress } from 'zlib';
-import operationFailed from '../utils/operation-failed.js';
+import operationFailed from '../../utils/operation-failed.js';
 import { pipeline } from 'stream/promises';
 
 export default async function compress(currentDir, from, to) {
