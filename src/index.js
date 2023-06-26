@@ -18,6 +18,7 @@ import cp from './basic/cp.js';
 import mv from './basic/mv.js';
 import rm from './basic/rm.js';
 import os from './os/os.js';
+import hash from './hash/hash.js';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
@@ -77,6 +78,9 @@ const startApp = async () => {
           break;
         case 'os':
           await os(__currentDir, ...args);
+          break;
+        case 'hash':
+          await hash(__currentDir, ...args);
           break;
         case '.exit': {
           rl.close();
