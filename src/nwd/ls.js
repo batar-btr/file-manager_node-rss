@@ -23,5 +23,4 @@ export default async function ls(currentDir) {
     return 0;
   }
   console.table([...directories.sort(compareName), ...files.sort(compareName)]);
-  return currentDir
 }

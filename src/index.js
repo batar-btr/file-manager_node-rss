@@ -19,6 +19,8 @@ import mv from './basic/mv.js';
 import rm from './basic/rm.js';
 import os from './os/os.js';
 import hash from './hash/hash.js';
+import compress from './zip/compress.js';
+import decompress from './zip/decompress.js';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
@@ -56,10 +58,10 @@ const startApp = async () => {
           __currentDir = await cd(args, __currentDir);
           break;
         case 'ls':
-          __currentDir = await ls(__currentDir);
+          await ls(__currentDir, ...args);
           break;
         case 'cat':
-          __currentDir = await cat(args, __currentDir);
+          await cat(__currentDir, ...args);
           break;
         case 'add':
           await add(__currentDir, ...args);
@@ -81,6 +83,12 @@ const startApp = async () => {
           break;
         case 'hash':
           await hash(__currentDir, ...args);
+          break;
+        case 'compress':
+          await compress(__currentDir, ...args);
+          break;
+        case 'decompress':
+          await decompress(__currentDir, ...args);
           break;
         case '.exit': {
           rl.close();
