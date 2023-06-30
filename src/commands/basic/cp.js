@@ -12,6 +12,10 @@ export default async function cp(currentDir, from, to) {
       const streamFrom = createReadStream(pathFrom);
       const streamTo = createWriteStream(pathTo);
 
+      streamFrom.on('error', (err) => {
+        operationFailed();
+      })
+
       streamTo.on('finish', () => {
         console.log(`the file was copied to ${pathTo}`);
         res()
